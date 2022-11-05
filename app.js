@@ -50,6 +50,23 @@ var uiController = (function () {
       document.querySelector(DOMStrings.dateLabel).textContent =
         unuudur.getMonth() + " сар";
     },
+
+    changeType: function () {
+      var fields = document.querySelectorAll(
+        DOMStrings.inputType +
+          "," +
+          DOMStrings.descriptionType +
+          "," +
+          DOMStrings.valueType
+      );
+
+      nodeListForeach(fields, function (el) {
+        el.classList.toggle("red-focus");
+      });
+
+      document.querySelector(DOMStrings.addBtn).classList.toggle("red");
+    },
+
     getInput: function () {
       return {
         type: document.querySelector(DOMStrings.inputType).value,
@@ -309,6 +326,10 @@ var appController = (function (uiController, fnController) {
         ctrlAddItem();
       }
     });
+
+    document
+      .querySelector(DOM.inputType)
+      .addEventListener("change", uiController.changeType);
 
     document
       .querySelector(DOM.containerDiv)
